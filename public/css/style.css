@@ -1,0 +1,223 @@
+
+@font-face {
+  font-family: redDeadRedemption;
+  src: url(/Fontes/CHINESER.TTF);
+}
+@font-face {
+  font-family: TextoCorrido;
+  src: url(/Fontes/HapnaSlabSerif-Medium.ttf);
+}
+:root{
+  --vermelhoRedDead:#e1121c;
+  --laranjaRockstar:#E19808;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "redDeadRedemption";
+  background-color: var(--vermelhoRedDead);
+}
+
+.header {
+  height: 75vh;
+  background-image: url(/public/assets/imgs/HeaderTest1.png);
+  background-color:var(--vermelhoRedDead);
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.navbar {
+  height: 7vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 5rem;
+}
+
+.header ul {
+  display: flex;
+  list-style: none;
+  gap: 5rem;
+  font-size: 1.9rem;
+  justify-content: end;
+  align-items: center;
+  color: #ffffff;
+}
+
+.header ul a {
+  color: #ffffff;
+  transition: transform .2s; 
+}
+
+.header ul a:hover{
+  color: var(--vermelhoRedDead);
+}
+.navbar h1{
+  color: white;
+  font-size: 3.1rem;
+  transition: transform .2s; 
+}
+.navbar a{
+  text-decoration: none;
+}
+
+.navbar h1:hover{
+  transform: scale(1.15);
+}
+
+.navbar h1 span {
+  color: #cc0000;
+}
+
+.title-header {
+  width: 22svw;
+  height: 40vh;
+  margin-top: 8vh;
+  display: flex;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  margin-left: 5rem;
+}
+
+.title-header h1 {
+  color: #ffffff;
+  font-size: 6rem;
+  text-align: center;
+}
+.title-header button {
+  background-color: black;
+  padding: 1rem;
+  border-radius: 0.625rem;
+  font-family: redDeadRedemption;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  border: 1px solid white;
+  transition: transform 0.2s;
+}
+.title-header button:hover {
+  background-color: var(--laranjaRockstar);
+  transform: scale(1.15);
+}
+
+.title-header span {
+  color: var(--vermelhoRedDead);
+  font-size: 8.125rem;
+  display: block;
+}
+
+.sobre-o-jogo {
+  background-image: url(/public/assets/imgs/background4k.png);
+  height: 52.25rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.titulo-sobre-o-jogo {
+  margin-left: 4.0625rem;
+}
+.titulo-sobre-o-jogo h1 {
+  color: #ffffff;
+  font-size: 5.625rem;
+  margin-bottom: 3.375rem;
+  max-width: 28.5625rem;
+  width: 100%;
+}
+
+.texto-sobre-o-jogo {
+  width: 30.875rem;
+  font-family: "TextoCorrido";
+  height: 25.6875rem;
+}
+.texto-sobre-o-jogo p {
+  color: #ffffff;
+  font-size: 1.375rem;
+}
+.todo-texto-sobre {
+  margin-left: 2.5rem;
+}
+
+.gangue{
+  height: 225vh;
+  background-color: black;
+  margin: auto;
+}
+.gangue h1{
+  color: white;
+  display: flex;
+  justify-content: center;
+  height: 9vh;
+  font-size: 5rem;
+}
+
+.cards-box{ 
+  height: 150vh;
+  padding: 3rem 1rem;
+}
+.cards{
+  display: flex;
+  justify-content: center;
+  gap: 4vw;
+  
+}
+.card{
+  margin-top: 10vh;
+  height: 20rem;
+
+}
+.cards img{
+height: 20rem;
+width: 35rem;
+
+}
+
+.texto-card{
+  display: flex;
+  gap: 4vw;
+  margin-top: 2vh;
+  
+
+}
+.texto-card p {
+  color: white;
+  width: 35rem ;
+  display: flex;
+  text-align: center;
+  margin-left: 1.6rem;
+  margin-right: 1.6rem;
+  font-size: 2rem;
+}
+
+.botao-subir {
+  display: none;   
+  position: fixed;   
+  bottom: 1.25rem; 
+  right: 1.875rem; 
+  z-index: 99; 
+  outline: none;   
+  cursor: pointer; 
+  background-color: black;
+  padding: 1rem;
+  border-radius: 0.625rem;
+  font-family: redDeadRedemption;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  border: 1px solid white;
+}
+
+.botao-subir:hover {
+  background-color: var(--laranjaRockstar);
+}
+
+
+
+
+
