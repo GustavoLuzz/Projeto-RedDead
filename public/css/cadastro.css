@@ -1,12 +1,13 @@
 @font-face {
   font-family: redDeadRedemption;
-  src: url(/Fontes/CHINESER.TTF);
+  src: url(../assets/Fontes/CHINESER.TTF);
 }
 
 @font-face {
   font-family: TextoCorrido;
-  src: url(/Fontes/HapnaSlabSerif-Medium.ttf);
+  src: url(../assets/Fontes/HapnaSlabSerif-Medium.ttf);
 }
+
 
 :root{
   --vermelhoRedDead: #e1121c;
@@ -94,7 +95,7 @@
 .container-dir {
   height: 83vh;
   width: 50vw;
-  background-image: url(/public/assets/imgs/gang-column.webp);
+  background-image: url(../assets/imgs/gang-column.webp);
   background-repeat: no-repeat;
   background-size: cover;
 }

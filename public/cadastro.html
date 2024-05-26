@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/public/css/cadastro.css" />
+    <link rel="stylesheet" href="./css/cadastro.css" />
     <title>Document</title>
   </head>
-  <body onload="listar()">
+  <body>
     <!--header inicio-->
     <nav class="navbar">
       <div class="titulo-nav">
-        <a href="/public/index.html">
+        <a href="./index.html">
           <h1>RED DEAD REDEMPTION <span>II</span></h1>
         </a>
       </div>
       <ul>
-        <li><a href="/public/index.html#sobre">Sobre</a></li>
-        <li><a href="/public/index.html#gangue">Gangue</a></li>
+        <li><a href="./index.html#sobre">Sobre</a></li>
+        <li><a href="./index.html#gangue">Gangue</a></li>
         <li><a href="#">Natureza</a></li>
         <li><a href="#">RedGuess</a></li>
       </ul>
@@ -63,8 +63,7 @@
                 Concluir Cadastro
               </button>
               <span
-                >Já é cadastrado? Faça
-                <a href="/public/login.html">Login</a></span
+                >Já é cadastrado? Faça <a href="./login.html">Login</a></span
               >
             </form>
           </div>
@@ -79,71 +78,10 @@
       </div>
       <div class="links-rapidos">
         <div class="logos">
-          <img src="/public/assets/icon/icon-github.png" alt="" />
+          <img src="./assets/icon/icon-github.png" alt="" />
         </div>
       </div>
     </div>
-    <!--header fim-->
-
-    <!-- <div class="login">
-      <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-          <span id="mensagem_erro"></span>
-        </div>
-      </div>
-      <div class="container">
-        <div class="card card-cadastro">
-          <h2>Bem-vindo!</h2>
-          <div class="formulario">
-            <div class="campo">
-              <span>Empresa:</span>
-              <select name="empresas" id="listaEmpresas">
-                <option selected>Selecione uma empresa</option>
-              </select>
-            </div>
-            <div class="campo">
-              <span>Nome:</span>
-              <input id="nome_input" type="text" placeholder="Seu nome" />
-            </div>
-            <div class="campo">
-              <span>E-mail:</span>
-              <input
-                id="email_input"
-                type="text"
-                placeholder="meuemail@provedor.com"
-              />
-            </div>
-            <div class="campo">
-              <span>Senha:</span>
-              <input id="senha_input" type="password" placeholder="******" />
-            </div>
-            <div class="campo">
-              <span>Confirmação da Senha:</span>
-              <input
-                id="confirmacao_senha_input"
-                type="password"
-                placeholder="******"
-              />
-            </div>
-            <button class="botao" onclick="cadastrar()">Cadastrar</button>
-          </div>
-          <div id="div_aguardar" class="loading-div">
-            <img src="./assets/circle-loading.gif" id="loading-gif" />
-          </div>
-
-          <div id="div_erros_login"></div>
-        </div>
-      </div>
-    </div>
-
-    //footer
-    <div class="footer">
-      <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-        <span class="version">v1.0.0</span>
-      </div>
-    </div> -->
-    <!--footer fim-->
   </body>
 </html>
 
@@ -164,8 +102,6 @@
     let senhasIguais = false;
 
     // validação usuário
-    // colotii-GOD
-    // colotiiGOD
 
     // validação email
     if (email.trim() != "") {
@@ -177,9 +113,9 @@
     }
     //validação usuário
     if (usuario != "") {
-      let regexUsuario = /\s/;
+      let regexEspaco = /\s/;
       let caracteresUsuario = usuario.length >= 3;
-      if (regexUsuario && caracteresUsuario) {
+      if (regexEspaco.test(usuario) && caracteresUsuario) {
         usuarioValido = true;
       }
     }
@@ -190,7 +126,7 @@
       //  Senha deve conter números de 0-9,
       // 1 caracter minúsculo, 1 maísuculo, um caractere especial e precisa conter ao menos 8 caracteres.
       for (i = 0; i < 10; i++) {
-        if (senha.indexOf(i) > -1 && regexSenha) {
+        if (senha.indexOf(i) > -1 && regexSenha.test(senha)) {
           senhaValida = true;
         }
       }
@@ -198,20 +134,16 @@
 
     //validacao senhas iguais
     if (confirmacaoSenha != "") {
-      if (confirmacaoSenha != senha) {
+      if (confirmacaoSenha == senha) {
         senhaValida = true;
       }
     }
 
     if (!usuarioValido || !emailValido || !senhaValida || !senhasIguais) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
+      alert("Dados inseridos incorretos");
       return false;
     } else {
-      setInterval(sumirMensagem, 5000);
+      alert("Cadastro concluído com sucesso");
     }
 
     // Enviando o valor da nova input
@@ -223,10 +155,9 @@
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        empresaServer: empresaVar,
+        usuarioServer: usuario,
+        emailServer: email,
+        senhaServer: senha,
       }),
     })
       .then(function (resposta) {
@@ -243,36 +174,14 @@
           }, "2000");
 
           limparFormulario();
-          finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
       });
 
     return false;
-  }
-
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
-  function sumirMensagem() {
-    cardErro.style.display = "none";
   }
 </script>

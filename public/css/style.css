@@ -1,12 +1,14 @@
 
 @font-face {
   font-family: redDeadRedemption;
-  src: url(/Fontes/CHINESER.TTF);
+  src: url(../assets/Fontes/CHINESER.TTF);
 }
+
 @font-face {
   font-family: TextoCorrido;
-  src: url(/Fontes/HapnaSlabSerif-Medium.ttf);
+  src: url(../assets/Fontes/HapnaSlabSerif-Medium.ttf);
 }
+
 :root{
   --vermelhoRedDead:#e1121c;
   --laranjaRockstar:#E19808;
@@ -25,7 +27,7 @@ body {
 
 .header {
   height: 75vh;
-  background-image: url(/public/assets/imgs/HeaderTest1.png);
+  background-image: url(../assets/imgs/HeaderTest1.png);
   background-color:var(--vermelhoRedDead);
   background-repeat: no-repeat;
   background-size: cover;
@@ -115,7 +117,7 @@ body {
 }
 
 .sobre-o-jogo {
-  background-image: url(/public/assets/imgs/background4k.png);
+  background-image: url(../assets/imgs/background4k.png);
   height: 52.25rem;
   background-repeat: no-repeat;
   background-size: cover;

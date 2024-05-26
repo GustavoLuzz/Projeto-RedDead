@@ -12,9 +12,10 @@ USE redDead;
 
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
+	usuario VARCHAR(15),
 	email VARCHAR(50),
-	senha VARCHAR(50)
+	senha VARCHAR(15),
+	CONSTRAINT dadosUnicos UNIQUE (usuario, email)
 );
 
 
