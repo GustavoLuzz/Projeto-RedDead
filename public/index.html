@@ -28,7 +28,7 @@
         <ul>
           <li><a href="#sobre">Sobre</a></li>
           <li><a href="#gangue">Gangue</a></li>
-          <li><a href="#">Natureza</a></li>
+          <li><a href="#natureza">Natureza</a></li>
           <li><a href="#">RedGuess</a></li>
         </ul>
       </nav>
@@ -204,16 +204,90 @@
         </div>
       </div>
     </section>
-    <section id="natureza">
-      <h1 style="height: 100vh">
-        Aqui conterá informações sobre a natureza do jogo redDead Redemption II
-      </h1>
+    <section class="natureza" id="natureza">
+      <main class="carousel-container">
+        <h1>
+          Natureza e Vida
+          <span style="color: #e1121c; font-size: 5.1rem">Selvagem</span>
+        </h1>
+        <div class="carousel">
+          <div class="item ativo">
+            <img
+              src="./assets/imgs/nature6.jpg"
+              alt="Primeira imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/wildlife5.jpg"
+              alt="Primeira imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/nature2.jpg"
+              alt="Segunda imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/nature3.jpg"
+              alt="Terceira imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/wildlife3.jpg"
+              alt="Quarta imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/nature1.jpg"
+              alt="Quinta imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/wildlife4.jpg"
+              alt="Sexta imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/nature4.jpg"
+              alt="Sétima imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/wildlife2.jpg"
+              alt="Oitava imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/nature5.jpg"
+              alt="Nona imagem sobre a natureza do jogo"
+            />
+          </div>
+          <div class="item">
+            <img
+              src="./assets/imgs/wildlife1.jpg"
+              alt="Décima imagem sobre a natureza do jogo"
+            />
+          </div>
+        </div>
+        <button class="btn prev">Anterior</button>
+        <button class="btn next">Próximo</button>
+        <div class="dots"></div>
+      </main>
     </section>
   </body>
 </html>
 
 <script>
-  //Função para aparecer o botão que retorna ao topo da página
+  //Função que fará um botão lateral, ao ser clicado subir ao topo da página
   let botaoSubir = document.getElementById("btn_subir");
 
   // Quando o usuário scrollar 20px pra baixo, exibir o botão
@@ -237,4 +311,57 @@
     document.body.scrollTop = 0; // Para Safari
     document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
   }
+
+  // Função que define a funcionalidade do carrossel
+  document.addEventListener("DOMContentLoaded", function () {
+    let carousel = document.querySelector(".carousel");
+    let items = carousel.querySelectorAll(".item");
+    let dotsContainer = document.querySelector(".dots");
+
+    // Inserir dots no DOM
+    items.forEach((_, index) => {
+      let dot = document.createElement("span");
+      dot.classList.add("dot");
+      if (index === 0) dot.classList.add("ativo");
+      dot.dataset.index = index;
+      dotsContainer.appendChild(dot);
+    });
+
+    let dots = document.querySelectorAll(".dot");
+
+    // Função pra mostrar algum item específico
+    function showItem(index) {
+      items.forEach((item, idx) => {
+        item.classList.remove("ativo");
+        dots[idx].classList.remove("ativo");
+        if (idx === index) {
+          item.classList.add("ativo");
+          dots[idx].classList.add("ativo");
+        }
+      });
+    }
+
+    // Event listeners para os botões
+    document.querySelector(".prev").addEventListener("click", () => {
+      let index = [...items].findIndex((item) =>
+        item.classList.contains("ativo")
+      );
+      showItem((index - 1 + items.length) % items.length);
+    });
+
+    document.querySelector(".next").addEventListener("click", () => {
+      let index = [...items].findIndex((item) =>
+        item.classList.contains("ativo")
+      );
+      showItem((index + 1) % items.length);
+    });
+
+    // Event listeners for dots
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        let index = parseInt(dot.dataset.index);
+        showItem(index);
+      });
+    });
+  });
 </script>
