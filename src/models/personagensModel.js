@@ -6,16 +6,16 @@ function buscar(personagem, quantidade) {
       quantidade
       
     );
-  
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucaoSql = `
-          SELECT personagem, count(*) as quantidade FROM personagens GROUP BY personagem;
-      `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+ // buscando a quantidade de personagens
+        const instrucaoSql = `
+            SELECT personagem, count(*) as quantidade FROM personagens GROUP BY personagem;
+        `;
+    
+        // Executar a query no banco de dados e retornar a Promise
+        return database.executar(instrucaoSql);
   }
-  
-  module.exports = {
-    buscar
-  };
+    
+    module.exports = {
+        buscar
+    };
+    

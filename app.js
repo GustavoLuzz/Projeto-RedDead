@@ -18,6 +18,7 @@ const app = express();
 const indexRouter = require("./src/routes/index");
 const usuarioRouter = require("./src/routes/usuarios");
 const redguessRouter = require("./src/routes/redguess")
+const personagensRouter = require("./src/routes/personagens.js")
 
 
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/", redguessRouter);
+app.use("/", personagensRouter);
 
 
 app.listen(PORTA_APP, function () {
