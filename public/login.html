@@ -17,8 +17,8 @@
       <ul>
         <li><a href="./index.html#sobre">Sobre</a></li>
         <li><a href="./index.html#gangue">Gangue</a></li>
-        <li><a href="#">Natureza</a></li>
-        <li><a href="#">RedGuess</a></li>
+        <li><a href="./index.html#natureza">Natureza</a></li>
+        <li><a href="./redguess.html">RedGuess</a></li>
       </ul>
     </nav>
     <div class="container">
@@ -108,7 +108,7 @@
                   sessionStorage.EMAIL_USUARIO = json.email;
                   sessionStorage.USUARIO = json.usuario;
                   sessionStorage.ID_USUARIO = json.id;
-                  window.location.href = "http://localhost:3333/index.html";
+                  window.location.href = "http://localhost:3333/redguess.html";
                 })
                 .catch(function (erro) {
                   console.error("Erro ao parsear JSON:", erro);

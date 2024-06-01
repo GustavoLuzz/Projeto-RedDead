@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Red Guesser</title>
+  </head>
+  <body>
+    <h1>RED GUESSER</h1>
+    <div>
+      <form id="redGuessForm" method="post" onsubmit="enviar(event)">
+        <h2>
+          Selecione três traços de personalidade que você acredita combinar com
+          você
+        </h2>
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Valente"
+            id="ipt_valente"
+          />
+          Valente </label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Leal"
+            id="ipt_leal"
+          />
+          Leal </label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Corajoso"
+            id="ipt_corajoso"
+          />
+          Corajoso</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Determinado"
+            id="ipt_determinado"
+          />
+          Determinado</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Protetor"
+            id="ipt_protetor"
+          />
+          Protetor </label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Astuto"
+            id="ipt_astuto"
+          />
+          Astuto</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Fiel"
+            id="ipt_fiel"
+          />
+          Fiel</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Afetivo"
+            id="ipt_afetivo"
+          />
+          Afetivo</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            name="personalidade"
+            value="Divertido"
+            id="ipt_divertido"
+          />
+          Divertido </label
+        ><br />
+        <button type="submit">Enviar</button>
+      </form>
+      <div id="resultado"></div>
+    </div>
+
+    <script>
+      const personagem = [];
+      function enviar(event) {
+        event.preventDefault();
+
+        const form = document.getElementById("redGuessForm");
+        const dadosForm = new FormData(form);
+        const personaliadesSelecionadas = dadosForm.getAll("personalidade");
+        const valente = document.getElementById("ipt_valente");
+        const leal = document.getElementById("ipt_leal");
+        const corajoso = document.getElementById("ipt_corajoso");
+        const determinado = document.getElementById("ipt_determinado");
+        const protetor = document.getElementById("ipt_protetor");
+        const astuto = document.getElementById("ipt_astuto");
+        const fiel = document.getElementById("ipt_fiel");
+        const afetivo = document.getElementById("ipt_afetivo");
+        const divertido = document.getElementById("ipt_divertido");
+
+        if (personaliadesSelecionadas.length !== 3) {
+          document.getElementById("resultado").innerHTML =
+            "Por favor, selecione exatamente três traços de personalidade.";
+          return;
+        }
+
+        if (valente.checked && astuto.checked) {
+          personagem.push("Dutch");
+          console.log(personagem);
+        } else if (leal.checked && corajoso.checked) {
+          personagem.push("Arthur");
+        } else if (corajoso.checked && determinado.checked) {
+          personagem.push("Jonh");
+        } else if (determinado.checked && valente.checked) {
+          personagem.push("Sadie");
+        } else if (protetor.checked && leal.checked) {
+          personagem.push("Charles");
+        } else if (astuto.checked && fiel.checked) {
+          personagem.push("Hosea");
+        } else if (fiel.checked && protetor.checked) {
+          personagem.push("Javier");
+        } else if (leal.checked && afetivo.checked) {
+          personagem.push("Abigail");
+        } else if (divertido.checked && astuto.checked) {
+          personagem.push("Lenny");
+        }
+        const personagemSelecionado = personagem[0];
+        const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+        fetch("http://localhost:3333/enviar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idUsuarioServer: idUsuario,
+            personagemServer: personagemSelecionado,
+          }),
+        })
+          .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+              window.location.href = "http://localhost:3333/login.html";
+            } else {
+              alert(resposta.text());
+              throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+          })
+          .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            return false;
+          });
+      }
+    </script>
+  </body>
+</html>

@@ -18,6 +18,15 @@ CREATE TABLE usuario (
 	CONSTRAINT dadosUnicos UNIQUE (usuario, email)
 );
 
+CREATE TABLE personagens (
+	fkUsuario INT,
+    personagem VARCHAR(45),
+    CONSTRAINT fk_usuario
+    FOREIGN KEY (fkUsuario) 
+    REFERENCES usuario (id),
+    PRIMARY KEY (fkUsuario)
+);
+
 
 
 
