@@ -100,6 +100,25 @@
     </div>
 
     <script>
+      const personagensDisponiveis = [
+        "Dutch",
+        "Arthur",
+        "Jonh",
+        "Sadie",
+        "Charles",
+        "Hosea",
+        "Javier",
+        "Abigail",
+        "Lenny",
+      ];
+
+      function selecionarPersonagemAleatorio() {
+        const indiceAleatorio = Math.floor(
+          Math.random() * personagensDisponiveis.length
+        );
+        return personagensDisponiveis[indiceAleatorio];
+      }
+
       const personagem = [];
       function enviar(event) {
         event.preventDefault();
@@ -143,8 +162,10 @@
         } else if (divertido.checked && astuto.checked) {
           personagem.push("Lenny");
         } else {
-          personagem.push("Dutch");
+          const personagemAleatorio = selecionarPersonagemAleatorio();
+          personagem.push(personagemAleatorio);
         }
+
         const personagemSelecionado = personagem[0];
         const idUsuario = sessionStorage.getItem("ID_USUARIO");
 
