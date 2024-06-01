@@ -162,7 +162,11 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-              window.location.href = "http://localhost:3333/login.html";
+              resposta.json().then((json) => {
+                console.log("Resposta JSON:", json);
+                sessionStorage.PERSONAGEM_FAV = personagemSelecionado;
+                window.location.href = "http://localhost:3333/dashboard.html";
+              });
             } else {
               alert(resposta.text());
               throw "Houve um erro ao tentar realizar o cadastro!";
