@@ -3,105 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Red Guesser</title>
+    <title>Red Guess</title>
     <link
       rel="shortcut icon"
       href="./assets/icon/favicon.ico"
       type="image/x-icon"
     />
+    <link rel="stylesheet" href="./css/redguess.css" />
   </head>
   <body>
-    <h1>RED GUESS</h1>
-    <div>
-      <form id="redGuessForm" method="post" onsubmit="enviar(event)">
-        <h2>
-          Selecione três qualidades que você acredita combinar com sua
-          personalidade:
-        </h2>
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Valente"
-            id="ipt_valente"
-          />
-          Valente </label
-        ><br />
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Leal"
-            id="ipt_leal"
-          />
-          Leal </label
-        ><br />
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Corajoso"
-            id="ipt_corajoso"
-          />
-          Corajoso</label
-        ><br />
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Determinado"
-            id="ipt_determinado"
-          />
-          Determinado</label
-        ><br />
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Protetor"
-            id="ipt_protetor"
-          />
-          Protetor </label
-        ><br />
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Astuto"
-            id="ipt_astuto"
-          />
-          Astuto</label
-        ><br />
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Fiel"
-            id="ipt_fiel"
-          />
-          Fiel</label
-        ><br />
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Afetivo"
-            id="ipt_afetivo"
-          />
-          Afetivo</label
-        ><br />
-        <label
-          ><input
-            type="checkbox"
-            name="personalidade"
-            value="Divertido"
-            id="ipt_divertido"
-          />
-          Divertido </label
-        ><br />
-        <button type="submit">Enviar</button>
-      </form>
-      <div id="resultado"></div>
+    <nav class="navbar">
+      <div class="titulo-nav">
+        <a href="./index.html">
+          <h1>RED DEAD REDEMPTION <span>II</span></h1>
+        </a>
+      </div>
+      <ul>
+        <li><a href="./index.html#sobre">Sobre</a></li>
+        <li><a href="./index.html#gangue">Gangue</a></li>
+        <li><a href="./index.html#natureza">Natureza</a></li>
+        <li><a href="./redguess.html">RedGuess</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="titulo">
+        <h1><span>RED</span> GUESS</h1>
+      </div>
+      <div class="formulario">
+        <form id="redGuessForm" method="post" onsubmit="enviar(event)">
+          <h2>
+            Selecione <span>três</span> qualidades que você acredita combinar
+            com sua personalidade e descubra qual personagem é semelhante a
+            você:
+          </h2>
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Valente"
+              id="ipt_valente"
+            />
+            Valente </label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Leal"
+              id="ipt_leal"
+            />
+            Leal </label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Corajoso"
+              id="ipt_corajoso"
+            />
+            Corajoso</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Determinado"
+              id="ipt_determinado"
+            />
+            Determinado</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Protetor"
+              id="ipt_protetor"
+            />
+            Protetor </label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Astuto"
+              id="ipt_astuto"
+            />
+            Astuto</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Fiel"
+              id="ipt_fiel"
+            />
+            Fiel</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Afetivo"
+              id="ipt_afetivo"
+            />
+            Afetivo</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="personalidade"
+              value="Divertido"
+              id="ipt_divertido"
+            />
+            Divertido </label
+          ><br />
+          <button type="submit">Enviar</button>
+          <div id="resultado"></div>
+        </form>
+      </div>
     </div>
 
     <script>
@@ -143,7 +162,7 @@
 
         if (personaliadesSelecionadas.length !== 3) {
           document.getElementById("resultado").innerHTML =
-            "Por favor, selecione exatamente três traços de personalidade.";
+            "Por favor, selecione exatamente três qualidades.";
           return;
         }
 
@@ -195,7 +214,7 @@
               });
             } else {
               alert(resposta.text());
-              throw "Houve um erro ao tentar realizar o cadastro!";
+              throw "Houve um erro ao enviar o formulário";
             }
           })
           .catch(function (resposta) {
