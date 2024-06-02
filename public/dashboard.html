@@ -14,8 +14,20 @@
     <script src="../js/sessao.js"></script>
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #graficos {
+        width: 100% !important;
+        height: 95% !important;
+      }
+    </style>
   </head>
-  <body onload="validarSessao()">
+  <body onload="validarSessao(), buscar()">
     <div class="janela">
       <div class="header-left">
         <h1>Red dead redemption <span>II</span></h1>
@@ -23,7 +35,6 @@
           <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
           <h3>Personagem favorito: <span id="personagem_fav"></span></h3>
         </div>
-        <div class="btn-logout" onclick="buscar()">Exibir personagens</div>
         <div class="btn-logout" onclick="limparSessao()">
           <h3>Sair</h3>
         </div>
@@ -35,78 +46,110 @@
         <div class="btns-dash" id="btnAquario">
           <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
         </div>
-        <canvas id="graficos"></canvas>
+        <div class="chart-container">
+          <canvas id="graficos"></canvas>
+        </div>
       </div>
     </div>
+
+    <script>
+      function buscar(personagem, quantidade) {
+        fetch("http://localhost:3333/buscar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ personagem, quantidade }),
+        })
+          .then(function (resposta) {
+            if (resposta.ok) {
+              resposta.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico(resposta);
+              });
+            } else {
+              console.error("Nenhum dado encontrado ou erro na API");
+            }
+          })
+          .catch(function (error) {
+            console.error(
+              `Erro na obtenção dos dados para o gráfico: ${error.message}`
+            );
+          });
+      }
+
+      function plotarGrafico(resposta) {
+        const labels = resposta.map((entry) => entry.personagem);
+        const valores = resposta.map((entry) => entry.quantidade);
+
+        const ctx = document.getElementById("graficos").getContext("2d");
+
+        const myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Vezes selecionado",
+                data: valores,
+                backgroundColor: "#e1121c",
+                borderColor: "#e1121c",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                ticks: {
+                  color: "#fff", // Cor dos rótulos dos personagens
+                  font: {
+                    size: 30,
+                    family: "textoCorrido", // Tamanho da fonte dos rótulos dos personagens
+                  },
+                },
+              },
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  color: "#fff", // Cor dos números no eixo y
+                  font: {
+                    size: 25,
+                    family: "textoCorrido", // Tamanho da fonte dos números no eixo y
+                  },
+                },
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: "#fff", // Cor do texto da legenda
+                  font: {
+                    size: 50,
+                    family: "redDeadRedemption",
+                    style: "normal",
+                    weight: "bold",
+                  },
+                },
+              },
+              tooltip: {
+                position: "nearest",
+                bodyFont: {
+                  size: 20,
+                },
+                titleFont: {
+                  size: 20,
+                },
+                backgroundColor: "rgba(0,0,0,0.7)",
+                titleColor: "#fff",
+                bodyColor: "#fff",
+              },
+            },
+          },
+        });
+      }
+    </script>
   </body>
 </html>
-
-<script>
-  // O gráfico é construído com três funções:
-  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-  //     Para ajustar o "select", ajuste o comando sql em src/models
-  function buscar(personagem, quantidade) {
-    fetch("http://localhost:3333/buscar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ personagem, quantidade }),
-    })
-      .then(function (resposta) {
-        if (resposta.ok) {
-          resposta.json().then(function (resposta) {
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            resposta.reverse();
-
-            plotarGrafico(resposta);
-          });
-        } else {
-          console.error("Nenhum dado encontrado ou erro na API");
-        }
-      })
-      .catch(function (error) {
-        console.error(
-          `Erro na obtenção dos dados para o gráfico: ${error.message}`
-        );
-      });
-  }
-
-  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-  // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
-  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-  function plotarGrafico(resposta) {
-    const labels = resposta.map((entry) => entry.personagem);
-    const valores = resposta.map((entry) => entry.quantidade);
-
-    const ctx = document.getElementById("graficos");
-    const myChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Vezes selecionado",
-            data: valores,
-            backgroundColor: "#fff, #000",
-            borderColor: "rgba(75, 192, 192, 1)",
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
-  }
-</script>
