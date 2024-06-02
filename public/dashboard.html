@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <link
+      rel="shortcut icon"
+      href="./assets/icon/favicon.ico"
+      type="image/x-icon"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard RedDead</title>
+    <link rel="stylesheet" href="./css/dashboards.css" />
+    <script src="../js/sessao.js"></script>
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #graficos {
+        width: 100% !important;
+        height: 95% !important;
+      }
+    </style>
+  </head>
+  <body onload="validarSessao(), buscar()">
+    <div class="janela">
+      <div class="header-left">
+        <h1>Red dead redemption <span>II</span></h1>
+        <div class="hello">
+          <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+          <h3>Personagem favorito: <span id="personagem_fav"></span></h3>
+        </div>
+        <div class="btn-logout" onclick="limparSessao()">
+          <h3>Sair</h3>
+        </div>
+      </div>
+
+      <div class="dash">
+        <div id="alerta"></div>
+
+        <div class="btns-dash" id="btnAquario">
+          <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+        </div>
+        <div class="chart-container">
+          <canvas id="graficos"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function buscar(personagem, quantidade) {
+        fetch("http://localhost:3333/buscar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ personagem, quantidade }),
+        })
+          .then(function (resposta) {
+            if (resposta.ok) {
+              resposta.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico(resposta);
+              });
+            } else {
+              console.error("Nenhum dado encontrado ou erro na API");
+            }
+          })
+          .catch(function (error) {
+            console.error(
+              `Erro na obtenção dos dados para o gráfico: ${error.message}`
+            );
+          });
+      }
+
+      function plotarGrafico(resposta) {
+        const labels = resposta.map((entry) => entry.personagem);
+        const valores = resposta.map((entry) => entry.quantidade);
+
+        const ctx = document.getElementById("graficos").getContext("2d");
+
+        const myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Vezes selecionado",
+                data: valores,
+                backgroundColor: "#e1121c",
+                borderColor: "#e1121c",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                ticks: {
+                  color: "#fff", // Cor dos rótulos dos personagens
+                  font: {
+                    size: 30,
+                    family: "textoCorrido", // Tamanho da fonte dos rótulos dos personagens
+                  },
+                },
+              },
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  color: "#fff", // Cor dos números no eixo y
+                  font: {
+                    size: 25,
+                    family: "textoCorrido", // Tamanho da fonte dos números no eixo y
+                  },
+                },
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: "#fff", // Cor do texto da legenda
+                  font: {
+                    size: 50,
+                    family: "redDeadRedemption",
+                    style: "normal",
+                    weight: "bold",
+                  },
+                },
+              },
+              tooltip: {
+                position: "nearest",
+                bodyFont: {
+                  size: 20,
+                },
+                titleFont: {
+                  size: 20,
+                },
+                backgroundColor: "rgba(0,0,0,0.7)",
+                titleColor: "#fff",
+                bodyColor: "#fff",
+              },
+            },
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,11 +1,24 @@
 /* pagina mural */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@font-face {
+  font-family: redDeadRedemption;
+  src: url(../assets/Fontes/CHINESER.TTF);
+}
+
+@font-face {
+  font-family: TextoCorrido;
+  src: url(../assets/Fontes/HapnaSlabSerif-Medium.ttf);
+}
+
+:root{
+  --vermelhoRedDead:#e1121c;
+  --laranjaRockstar:#E19808;
+}
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family:redDeadRedemption
 }
 
 .label-captura {
@@ -348,8 +361,8 @@ canvas {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border-right: 3px solid #32b9cd;
-  background-color: #212124;
+  border-right: 1px solid #fff;  
+  background-color: #000
 }
 
 .dash-right {
@@ -365,23 +378,31 @@ canvas {
 }
 
 .header-left h1 {
-  color: #32b9cd;
+  color: #fff;
+   span{
+    color: var(--vermelhoRedDead)
+   }
 }
 
 .hello {
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hello h3 {
-  color: #e3b062;
-  font-weight: 300;
-  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 200;
+  font-size: 1.5rem;
+  font-family: textoCorrido;
 }
 
 .hello h3 span {
-  font-weight: 800;
+  font-weight: 150;
+  color: var(--vermelhoRedDead);
+  font-family: redDeadRedemption;
 }
 
 .btn-nav {
@@ -418,11 +439,13 @@ canvas {
   margin: 0;
   padding: 0;
   width: 20%;
-  background-color: #32b9cd;
+  background-color: #000;
   color: white;
   border-radius: 10px;
   text-align: center;
   padding: 10px 15px;
   margin-bottom: 100px;
   cursor: pointer;
+border: 1px solid #fff;
 }
+
