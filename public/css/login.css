@@ -107,7 +107,7 @@
   border-radius: 3%;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.5rem;
   padding: auto;
 }
 
@@ -260,7 +260,7 @@
 
 .sign-in-box a {
   text-decoration: none;
-  color: rgb(0, 0, 255);
+  color: var(--vermelhoRedDead);
   font-family: TextoCorrido;
 }
 

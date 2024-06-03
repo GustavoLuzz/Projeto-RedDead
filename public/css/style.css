@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: redDeadRedemption;
   src: url(../assets/Fontes/CHINESER.TTF);
@@ -9,9 +8,9 @@
   src: url(../assets/Fontes/HapnaSlabSerif-Medium.ttf);
 }
 
-:root{
-  --vermelhoRedDead:#e1121c;
-  --laranjaRockstar:#E19808;
+:root {
+  --vermelhoRedDead: #e1121c;
+  --laranjaRockstar: #e19808;
 }
 
 * {
@@ -28,10 +27,9 @@ body {
 .header {
   height: 75vh;
   background-image: url(../assets/imgs/HeaderTest1.png);
-  background-color:var(--vermelhoRedDead);
+  background-color: var(--vermelhoRedDead);
   background-repeat: no-repeat;
   background-size: cover;
-  
 }
 
 .navbar {
@@ -54,22 +52,22 @@ body {
 
 .header ul a {
   color: #ffffff;
-  transition: transform .2s; 
+  transition: transform 0.2s;
 }
 
-.header ul a:hover{
+.header ul a:hover {
   color: var(--vermelhoRedDead);
 }
-.navbar h1{
+.navbar h1 {
   color: white;
   font-size: 3.1rem;
-  transition: transform .2s; 
+  transition: transform 0.2s;
 }
-.navbar a{
+.navbar a {
   text-decoration: none;
 }
 
-.navbar h1:hover{
+.navbar h1:hover {
   transform: scale(1.15);
 }
 
@@ -146,12 +144,12 @@ body {
   margin-left: 2.5rem;
 }
 
-.gangue{
+.gangue {
   height: 225vh;
   background-color: black;
   margin: auto;
 }
-.gangue h1{
+.gangue h1 {
   color: white;
   display: flex;
   justify-content: center;
@@ -159,37 +157,32 @@ body {
   font-size: 5rem;
 }
 
-.cards-box{ 
+.cards-box {
   height: 150vh;
   padding: 3rem 1rem;
 }
-.cards{
+.cards {
   display: flex;
   justify-content: center;
   gap: 4vw;
-  
 }
-.card{
+.card {
   margin-top: 10vh;
   height: 20rem;
-
 }
-.cards img{
-height: 20rem;
-width: 35rem;
-
+.cards img {
+  height: 20rem;
+  width: 35rem;
 }
 
-.texto-card{
+.texto-card {
   display: flex;
   gap: 4vw;
   margin-top: 2vh;
-  
-
 }
 .texto-card p {
   color: white;
-  width: 35rem ;
+  width: 35rem;
   display: flex;
   text-align: center;
   margin-left: 1.6rem;
@@ -198,13 +191,13 @@ width: 35rem;
 }
 
 .botao-subir {
-  display: none;   
-  position: fixed;   
-  bottom: 1.25rem; 
-  right: 1.875rem; 
-  z-index: 99; 
-  outline: none;   
-  cursor: pointer; 
+  display: none;
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.875rem;
+  z-index: 99;
+  outline: none;
+  cursor: pointer;
   background-color: black;
   padding: 1rem;
   border-radius: 0.625rem;
@@ -219,7 +212,7 @@ width: 35rem;
   background-color: var(--laranjaRockstar);
 }
 
-.natureza{
+.natureza {
   height: 101vh;
   display: flex;
   align-items: center;
@@ -236,7 +229,7 @@ width: 35rem;
   font-family: redDeadRedemption;
   font-weight: 300;
   font-size: 5rem;
-  color:#ffff;
+  color: #ffff;
 }
 
 .carousel-container {
@@ -275,22 +268,21 @@ width: 35rem;
   }
 
   .btn {
-      padding: 1em 2em;
-      position: absolute;
-      transform: translateY(-50%);
-      top: 50%;
-      outline: none;
-      border: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      font-size: 12px;
-      font-weight: 900;
-      transition: transform 0.2s ease-in-out;
-      background-color: #000;
-      color: #ffffff;
-      border: 1px solid #ffff;
-      border-radius: 10px;
-      
+    padding: 1em 2em;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+    transition: transform 0.2s ease-in-out;
+    background-color: #000;
+    color: #ffffff;
+    border: 1px solid #ffff;
+    border-radius: 10px;
 
     &:active,
     &:focus {
@@ -330,9 +322,60 @@ width: 35rem;
     }
   }
 }
+.footer {
+  height: 10vh;
+  background-color: #121214;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding-right: 30px;
+}
 
+.texto-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+}
 
+.texto-footer h4 {
+  font-weight: 100;
+}
 
+.texto-footer p {
+  font-family: TextoCorrido;
+  font-size: 1.1rem;
+}
 
+.links-rapidos {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
 
+.links-rapidos img {
+  width: 40px;
+  height: 40px;
+}
 
+.sign-in-box span {
+  color: #ffffff;
+  text-align: center;
+  font-family: TextoCorrido;
+  font-size: 1.3rem;
+  padding: 3%;
+}
+
+.sign-in-box a {
+  text-decoration: none;
+  color: var(--vermelhoRedDead);
+  font-family: TextoCorrido;
+}
+
+.logos {
+  margin-left: auto;
+}

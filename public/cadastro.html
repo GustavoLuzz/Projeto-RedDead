@@ -34,36 +34,42 @@
           <div class="formulario">
             <form onsubmit="cadastrar(event)" method="post">
               <label for="usuario">Usuário</label>
-              <input
-                type="text"
-                required
-                placeholder="Arthur-Morgan"
-                id="usuario"
-              />
+              <input type="text" placeholder="Arthur-Morgan" id="usuario" />
+              <span class="card-erro" id="erro_usuario"
+                >Usuário deve conter 3 caracteres, e não pode conter
+                espaços.</span
+              >
               <label for="email">email</label>
               <input
-                type="email"
+                type="text"
                 placeholder="arthur@provedor.com"
-                required
                 name="email"
                 id="email"
               />
+              <span class="card-erro" id="erro_email"
+                >Email inválido, deve conter @, . e o domínio.</span
+              >
               <label for="senha">Senha</label>
               <input
                 type="password"
                 name="senha"
                 id="senha"
                 placeholder="Arthur2020@"
-                required
               />
+              <span class="card-erro" id="erro_senha"
+                >Senha deve conter um número de 0-9, um caractere especial e
+                precisa conter ao menos 8 caracteres.</span
+              >
               <label for="confirmar senha">Confirmar senha</label>
               <input
                 type="password"
                 name="confirmar_senha"
                 id="senha_confirmada"
                 placeholder="*********"
-                required
               />
+              <span class="card-erro" id="erro_confirmacao"
+                >Senhas devem ser iguais.</span
+              >
               <button class="btn-enviar-cadastro" type="submit">
                 Concluir Cadastro
               </button>
@@ -83,7 +89,9 @@
       </div>
       <div class="links-rapidos">
         <div class="logos">
-          <img src="./assets/icon/icon-github.png" alt="" />
+          <a href="https://github.com/GustavoLuzz">
+            <img src="./assets/icon/icon-github.png" alt=""
+          /></a>
         </div>
       </div>
     </div>
@@ -92,6 +100,7 @@
 
 <script>
   function cadastrar(event) {
+    listaNumeros = [];
     event.preventDefault();
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
@@ -116,34 +125,53 @@
       }
     }
     //validação usuário
+    //Usuário deve conter 3 letras, e não pode conter espaço
     if (usuario != "") {
       let caracteresUsuario = usuario.length >= 3;
-      if (caracteresUsuario) {
+      let espaco = usuario.indexOf(" ") > -1;
+      if (caracteresUsuario && !espaco) {
         usuarioValido = true;
       }
     }
 
     // validacao senha
     if (senha != "") {
-      let regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$/;
-      //  Senha deve conter números de 0-9,
-      // 1 caracter minúsculo, 1 maísuculo, um caractere especial e precisa conter ao menos 8 caracteres.
+      let regexSenha = /^(?=.*[A-Z])(?=.*\W)$/;
+      let tamanhoSenha = senha.length >= 8;
+      let indiceExclamacao = senha.indexOf("!") > -1;
+      let indiceArroba = senha.indexOf("@") > -1;
+      let indiceHashtag = senha.indexOf("#") > -1;
+
+      let caractereEspecial = false;
+
+      if (indiceArroba || indiceExclamacao || indiceHashtag) {
+        caractereEspecial = true;
+      }
+      //  Senha deve conter um número de 0-9, um caractere especial e precisa conter ao menos 8 caracteres.
       for (i = 0; i < 10; i++) {
-        if (senha.indexOf(i) > -1 && regexSenha.test(senha)) {
-          senhasIguais = true;
+        if (senha.indexOf(i) > -1) {
+          listaNumeros.push(i);
         }
+      }
+      if (listaNumeros.length > 0 && tamanhoSenha && caractereEspecial) {
+        senhaValida = true;
       }
     }
 
     //validacao senhas iguais
     if (confirmacaoSenha != "") {
       if (confirmacaoSenha == senha) {
-        senhaValida = true;
+        senhasIguais = true;
       }
     }
-
-    if (!usuarioValido || !emailValido || !senhaValida || !senhasIguais) {
-      return alert("Dados inseridos incorretos");
+    if (!usuarioValido) {
+      document.getElementById("erro_usuario").style.display = "block";
+    } else if (!emailValido) {
+      document.getElementById("erro_email").style.display = "block";
+    } else if (!senhaValida) {
+      document.getElementById("erro_senha").style.display = "block";
+    } else if (!senhasIguais) {
+      document.getElementById("erro_confirmacao").style.display = "block";
     } else {
       alert("Cadastro concluído com sucesso");
     }
