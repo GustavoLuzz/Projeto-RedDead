@@ -11,7 +11,7 @@ function buscar(personagem, quantidade) {
             SELECT personagem, count(*) as quantidade FROM personagens GROUP BY personagem;
         `;
     
-        // Executar a query no banco de dados e retornar a Promise
+        
         return database.executar(instrucaoSql);
   }
     

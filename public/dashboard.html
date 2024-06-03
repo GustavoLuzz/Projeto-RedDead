@@ -80,8 +80,8 @@
       }
 
       function plotarGrafico(resposta) {
-        const labels = resposta.map((entry) => entry.personagem);
-        const valores = resposta.map((entry) => entry.quantidade);
+        const labels = resposta.map((dados) => dados.personagem);
+        const valores = resposta.map((dados) => dados.quantidade);
 
         const ctx = document.getElementById("graficos").getContext("2d");
 
@@ -103,20 +103,20 @@
             scales: {
               x: {
                 ticks: {
-                  color: "#fff", // Cor dos rótulos dos personagens
+                  color: "#fff",
                   font: {
                     size: 30,
-                    family: "textoCorrido", // Tamanho da fonte dos rótulos dos personagens
+                    family: "textoCorrido",
                   },
                 },
               },
               y: {
                 beginAtZero: true,
                 ticks: {
-                  color: "#fff", // Cor dos números no eixo y
+                  color: "#fff",
                   font: {
                     size: 25,
-                    family: "textoCorrido", // Tamanho da fonte dos números no eixo y
+                    family: "textoCorrido",
                   },
                 },
               },
@@ -126,7 +126,7 @@
             plugins: {
               legend: {
                 labels: {
-                  color: "#fff", // Cor do texto da legenda
+                  color: "#fff",
                   font: {
                     size: 50,
                     family: "redDeadRedemption",
