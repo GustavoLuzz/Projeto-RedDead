@@ -390,6 +390,15 @@ canvas {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+    a{
+      text-decoration: none;
+      color: var(--vermelhoRedDead);
+    }
+    p{
+      font-family: TextoCorrido;
+      font-size: 1.5rem;
+    }
 }
 
 .hello h3 {
@@ -448,4 +457,6 @@ canvas {
   cursor: pointer;
 border: 1px solid #fff;
 }
+
+
 
