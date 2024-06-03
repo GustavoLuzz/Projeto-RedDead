@@ -193,34 +193,37 @@
         const personagemSelecionado = personagem[0];
         const idUsuario = sessionStorage.getItem("ID_USUARIO");
 
-        fetch("http://localhost:3333/enviar", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            idUsuarioServer: idUsuario,
-            personagemServer: personagemSelecionado,
-          }),
-        })
-          .then(function (resposta) {
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-              resposta.json().then((json) => {
-                console.log("Resposta JSON:", json);
-                sessionStorage.PERSONAGEM_FAV = personagemSelecionado;
-                window.location.href = "http://localhost:3333/dashboard.html";
-              });
-            } else {
-              alert(resposta.text());
-              throw "Houve um erro ao tentar realizar o cadastro!";
-            }
+        if (idUsuario == undefined) {
+          alert("Faça login para continuar!");
+        } else {
+          fetch("http://localhost:3333/enviar", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              idUsuarioServer: idUsuario,
+              personagemServer: personagemSelecionado,
+            }),
           })
-          .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            return false;
-          });
+            .then(function (resposta) {
+              console.log("resposta: ", resposta);
+
+              if (resposta.ok) {
+                resposta.json().then((json) => {
+                  console.log("Resposta JSON:", json);
+                  sessionStorage.PERSONAGEM_FAV = personagemSelecionado;
+                  window.location.href = "http://localhost:3333/dashboard.html";
+                });
+              } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+              }
+            })
+            .catch(function (resposta) {
+              console.log(`#ERRO: ${resposta}`);
+              return false;
+            });
+        }
       }
     </script>
   </body>
