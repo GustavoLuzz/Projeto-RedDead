@@ -15,18 +15,19 @@ CREATE TABLE usuario (
 	usuario VARCHAR(15),
 	email VARCHAR(50),
 	senha VARCHAR(100),
-	CONSTRAINT dadosUnicos UNIQUE (usuario, email)
+	CONSTRAINT emailUnico UNIQUE (email),
+	CONSTRAINT usuarioUnico UNIQUE (usuario)
 );
 
 
 
-	CREATE TABLE personagens (
-		id INT PRIMARY KEY AUTO_INCREMENT,
-		fkUsuario INT,
-		personagem VARCHAR(45),
-		CONSTRAINT fk_usuario
-		FOREIGN KEY (fkUsuario) 
-		REFERENCES usuario (id)
+CREATE TABLE personagens (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	fkUsuario INT,
+	personagem VARCHAR(45),
+	CONSTRAINT fk_usuario
+	FOREIGN KEY (fkUsuario) 
+	REFERENCES usuario (id)
 	);
 
 

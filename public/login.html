@@ -39,7 +39,6 @@
                 placeholder="arthur@provedor.com"
                 name="email"
                 id="email"
-                value="gustavo@reddead.com"
               />
               <label for="senha">Senha</label>
               <input
@@ -47,7 +46,6 @@
                 name="senha"
                 id="senha"
                 placeholder="Arthur2020@"
-                value="Arthur2020@"
               />
 
               <button class="btn-enviar-cadastro" type="submit">
@@ -118,7 +116,7 @@
                 });
             } else {
               console.log("Houve um erro ao tentar realizar o login!");
-
+              alert("Email ou senha inválidos!");
               resposta
                 .text()
                 .then((texto) => {

@@ -165,42 +165,46 @@
     }
     if (!usuarioValido) {
       document.getElementById("erro_usuario").style.display = "block";
-    } else if (!emailValido) {
+    }
+    if (!emailValido) {
       document.getElementById("erro_email").style.display = "block";
-    } else if (!senhaValida) {
+    }
+    if (!senhaValida) {
       document.getElementById("erro_senha").style.display = "block";
-    } else if (!senhasIguais) {
+    }
+    if (!senhasIguais) {
       document.getElementById("erro_confirmacao").style.display = "block";
-    } else {
-      alert("Cadastro concluído com sucesso");
+    }
+    if (usuarioValido && emailValido && senhaValida && senhasIguais) {
+      fetch("http://localhost:3333/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          usuarioServer: usuario,
+          emailServer: email,
+          senhaServer: senha,
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            alert("Cadastro concluído com sucesso!");
+            window.location.href = "http://localhost:3333/login.html";
+          } else {
+            alert("Já é cadastrado! Faça login.");
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+      return false;
     }
 
     // Enviando o valor da nova input
-    fetch("http://localhost:3333/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        usuarioServer: usuario,
-        emailServer: email,
-        senhaServer: senha,
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          window.location.href = "http://localhost:3333/login.html";
-        } else {
-          alert(resposta.text());
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-
-    return false;
   }
 </script>
